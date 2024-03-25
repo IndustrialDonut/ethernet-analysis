@@ -36,6 +36,9 @@ def parse_manchester(v_series, ethernet_signal_T=1/10E6, wave_sample_T=1E-9):
     last_v = -1
     for i, v in v_series.items():
         t += wave_sample_T # 1GHz from my Rigol oscilloscope
+
+        # check for 'end of frame' with this
+        # if it's been more than an ethernet period without a new edge and we're not just at the start of the entire capture, then we call it ended
         efd_t += wave_sample_T
         if efd_t > (ethernet_signal_T * 1.5) and len(result) > 5:
             break
