@@ -120,14 +120,14 @@ def find_end_of_preamble(rawbits):
 
 # prepare for various ipv4 payload types
 def load_icmp_types():
-    icmp_types = pd.read_csv('icmp-parameters-types.csv')
+    icmp_types = pd.read_csv('protocol_tables/icmp-parameters-types.csv')
     return icmp_types
 
 # get icmp codes per message type and concat together
 def load_icmp_codes():
     dfs = []
-    for file in os.listdir('icmp_codes'):
-        path = os.path.join('icmp_codes', file)
+    for file in os.listdir('protocol_tables/icmp_codes'):
+        path = os.path.join('protocol_tables', 'icmp_codes', file)
         type_ = re.match('.*(\d)\.csv', file).group(1)
         df = pd.read_csv(path)
         df['Type'] = type_
